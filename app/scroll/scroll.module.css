@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navButton {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: #e9ecef;
+}
+
+.navButton.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.content {
+  flex: 1;
+  margin-left: 200px;
+  padding: 2rem;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+}
+
+/* 可选：添加暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background-color: #1a1a1a;
+  }
+
+  .navButton:hover {
+    background-color: #2d2d2d;
+  }
+
+  .navButton.active {
+    background-color: #3b82f6;
+  }
+}
+
+/* 可选：添加响应式设计 */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 150px;
+  }
+
+  .content {
+    margin-left: 150px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .navButton {
+    white-space: nowrap;
+  }
+} 

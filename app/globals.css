@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.flip-box.expanded {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.flip-box {
+  transition: background-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.flip-box:hover::before {
+  opacity: 1;
+  animation: shine 1s;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-200%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+#dragContainer {
+  background: radial-gradient(circle at center, #1f2937 0%, #111827 100%);
+  overflow: hidden;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+.feature-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.particle {
+  will-change: transform;
+}
+
+/* 3D翻转效果 */
+.flip-box {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  backface-visibility: hidden;
+}
+
+/* 发光效果 */
+.glow {
+  position: absolute;
+  inset: -5px;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0) 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.feature-card:hover .glow {
+  opacity: 1;
+}
+
+/* 渐变背景动画 */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-animate {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+}
+
+/* SVG文字动画样式 */
+.svg-text-animation path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+}
+
+/* 笔画动画效果 */
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 填充动画效果 */
+@keyframes fillIn {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: #4F46E5;
+  }
+}
+
+/* 添加到 globals.css */
+.mouse-follower {
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.decorative-circle {
+  transition: all 0.3s ease;
+}
+
+.decorative-circle:hover {
+  fill: rgba(236, 72, 153, 0.5);
+}
+
+@media (max-width: 768px) {
+  .svg-hero-flair {
+    transform: scale(0.7);
+  }
+}
+
+/* 使用CSS动画替代JavaScript动画 */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
